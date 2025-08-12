@@ -7,16 +7,18 @@ import { ThemeToggle } from "@/components/theme-toggle";
 import { useTheme } from "next-themes";
 
 export function WavyBackgroundDemo() {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme(); // <-- ALTERADO: use resolvedTheme
 
   // Define a cor de fundo com base no tema.
-  const backgroundFillColor = theme === "dark" ? "#09090b" : "#ffffff";
+  // resolvedTheme será 'dark' ou 'light' de forma confiável.
+  const backgroundFillColor = resolvedTheme === "dark" ? "#09090b" : "#ffffff";
 
   return (
     <WavyBackground
       className="max-w-4xl mx-auto pb-40"
       backgroundFill={backgroundFillColor}
     >
+      {/* ... o resto do seu código permanece o mesmo ... */}
       {/* Container para o botão de tema no canto superior direito */}
       <div className="absolute top-4 right-4 z-50">
         <ThemeToggle />
@@ -44,7 +46,6 @@ export function WavyBackgroundDemo() {
         <a
           href="/curriculo.pdf"
           download
-          // As cores foram corrigidas para terem alto contraste em ambos os temas
           className="inline-flex items-center px-4 py-2 rounded-lg shadow hover:opacity-90 transition bg-gray-800 text-white dark:bg-white dark:text-gray-800"
         >
           <svg
@@ -67,7 +68,6 @@ export function WavyBackgroundDemo() {
         {/* Botão Contate-me */}
         <a
           href="#contato"
-          // As cores foram corrigidas para terem alto contraste em ambos os temas
           className="inline-flex items-center px-4 py-2 rounded-lg shadow hover:opacity-90 transition bg-gray-800 text-white dark:bg-white dark:text-gray-800"
         >
           <svg
