@@ -1,18 +1,34 @@
 "use client";
+
 import React from "react";
 import { WavyBackground } from "./ui/wavy-background";
 import { PointerHighlight } from "@/components/ui/pointer-highlight";
+import { ThemeToggle } from "@/components/theme-toggle";
+import { useTheme } from "next-themes";
 
 export function WavyBackgroundDemo() {
+  const { theme } = useTheme();
+
+  // Define a cor de fundo com base no tema.
+  const backgroundFillColor = theme === "dark" ? "#09090b" : "#ffffff";
+
   return (
-    <WavyBackground className="max-w-4xl mx-auto pb-40">
+    <WavyBackground
+      className="max-w-4xl mx-auto pb-40"
+      backgroundFill={backgroundFillColor}
+    >
+      {/* Container para o botão de tema no canto superior direito */}
+      <div className="absolute top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
+
       {/* Nome */}
-      <p className="text-5xl md:text-4xl lg:text-7xl font-bold inter-var text-center bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 text-transparent bg-clip-text pb-2">
+      <p className="text-5xl md:text-4xl lg:text-7xl font-bold inter-var text-center bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 text-transparent bg-clip-text pb-4">
         Agostinho Alves
       </p>
 
       {/* Frase */}
-      <div className="mt-2 font-normal inter-var text-center flex items-center flex-col text-2xl text-gray-100 drop-shadow-md leading-relaxed">
+      <div className="mt- font-normal inter-var text-center flex items-center flex-col text-2xl text-foreground drop-shadow-md leading-relaxed">
         Desenvolvendo interfaces que conectam pessoas e tecnologia de forma
         <br />
         <PointerHighlight>
@@ -22,13 +38,14 @@ export function WavyBackgroundDemo() {
         </PointerHighlight>
       </div>
 
-      {/* Botões */}
+      {/* Botões - CORRIGIDO: Cores com contraste para tema claro e escuro */}
       <div className="flex items-center justify-center gap-4 mt-8">
         {/* Botão Baixar Currículo */}
         <a
           href="/curriculo.pdf"
           download
-          className="inline-flex items-center px-4 py-2 bg-white text-black rounded-lg shadow hover:bg-gray-100 transition"
+          // As cores foram corrigidas para terem alto contraste em ambos os temas
+          className="inline-flex items-center px-4 py-2 rounded-lg shadow hover:opacity-90 transition bg-gray-800 text-white dark:bg-white dark:text-gray-800"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +67,8 @@ export function WavyBackgroundDemo() {
         {/* Botão Contate-me */}
         <a
           href="#contato"
-          className="inline-flex items-center px-4 py-2 bg-white text-black rounded-lg shadow hover:bg-gray-100 transition"
+          // As cores foram corrigidas para terem alto contraste em ambos os temas
+          className="inline-flex items-center px-4 py-2 rounded-lg shadow hover:opacity-90 transition bg-gray-800 text-white dark:bg-white dark:text-gray-800"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

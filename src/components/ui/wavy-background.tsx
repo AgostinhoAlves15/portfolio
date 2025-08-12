@@ -9,7 +9,7 @@ export const WavyBackground = ({
   containerClassName,
   colors,
   waveWidth,
-  backgroundFill,
+  backgroundFill, // Adicionei esta propriedade
   blur = 10,
   speed = "fast",
   waveOpacity = 0.5,
@@ -20,7 +20,7 @@ export const WavyBackground = ({
   containerClassName?: string;
   colors?: string[];
   waveWidth?: number;
-  backgroundFill?: string;
+  backgroundFill?: string; // Adicionei esta propriedade
   blur?: number;
   speed?: "slow" | "fast";
   waveOpacity?: number;
@@ -85,9 +85,12 @@ export const WavyBackground = ({
 
   let animationId: number;
   const render = () => {
-    ctx.fillStyle = backgroundFill || "black";
     ctx.globalAlpha = waveOpacity || 0.5;
+    
+    // LINHA ALTERADA: Agora preenche com a cor passada na propriedade
+    ctx.fillStyle = backgroundFill || "#000000"; 
     ctx.fillRect(0, 0, w, h);
+    
     drawWave(5);
     animationId = requestAnimationFrame(render);
   };
@@ -97,15 +100,14 @@ export const WavyBackground = ({
     return () => {
       cancelAnimationFrame(animationId);
     };
-  }, []);
+  }, [backgroundFill]); // Adicionei backgroundFill como dependência para renderizar novamente quando a cor mudar
 
   const [isSafari, setIsSafari] = useState(false);
   useEffect(() => {
-    // I'm sorry but i have got to support it on safari.
     setIsSafari(
       typeof window !== "undefined" &&
-        navigator.userAgent.includes("Safari") &&
-        !navigator.userAgent.includes("Chrome")
+      navigator.userAgent.includes("Safari") &&
+      !navigator.userAgent.includes("Chrome")
     );
   }, []);
 
