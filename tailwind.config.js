@@ -94,3 +94,25 @@ module.exports = {
   },
   plugins: [require("tailwindcss-animate")],
 };
+// tailwind.config.js
+
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  // ... outras configurações
+  theme: {
+    extend: {
+      keyframes: {
+        // ... outras keyframes
+        "grow-line": {
+          "0%, 100%": { width: "0%" },
+          "50%": { width: "100%" },
+        },
+      },
+      animation: {
+        // ... outras animações
+        "grow-line": "grow-line 3s ease-in-out infinite",
+      },
+    },
+  },
+  // ...
+};
