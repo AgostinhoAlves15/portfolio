@@ -35,6 +35,17 @@ export function ProjectShowcase() {
         { name: "Python", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" },
       ],
     },
+    {
+      title: "Amotur",
+      description: "Breve descrição sobre o projeto e as tecnologias utilizadas.",
+      videoUrl: "/Vídeo-Amotur.webm",
+      link: "https://mapa-praia-next.vercel.app/",
+      stacks: [
+        { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" },
+        { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" },
+        { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" },
+      ],
+    },
   ];
 
   return (
