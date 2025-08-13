@@ -1,5 +1,5 @@
 import { ThemeProvider } from "@/components/theme-provider";
-
+import { WobbleCardDemo } from "@/components/Sobre";
 import { AnimatedPinDemo } from "@/components/Pin"
 import { FloatingNavDemo } from "@/components/NavBar"
 import { FlipWordsDemo } from "@/components/flip"
@@ -27,6 +27,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
           <main className="bg-background text-foreground min-h-screen flex flex-col">
             {/* Background */}
             <WavyBackgroundDemo />
+
+            {/* Sobre Mim */}
+            <WobbleCardDemo />
 
             {/* Navegação fixa no topo */}
             <FloatingNavDemo />
