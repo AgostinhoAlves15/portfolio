@@ -33,7 +33,7 @@ export function WobbleCardDemo() {
             Eu priorizo a comunicação e colaboração com o cliente
           </h2>
           <p className="mt-4 text-left text-base/6 text-neutral-200">
-            Sou muito flexível com comunicações de fuso horário, e prezo pela transparência e feedback contínuo em cada etapa do projeto.
+            Mantenho uma comunicação transparente e proativa para uma colaboração eficiente.   
           </p>
         </div>
         <img
@@ -48,8 +48,8 @@ export function WobbleCardDemo() {
       {/* Segundo card: Agora ele está livre para outro conteúdo */}
       <WobbleCard containerClassName="col-span-1 min-h-[300px] bg-gradient-to-tr from-purple-700 to-pink-700">
         <h2 className="max-w-80 text-left text-balance text-base md:text-xl lg:text-3xl font-semibold tracking-[-0.015em] text-white">
-          Sou muito flexível com comunicações de fuso horário
-        </h2>
+            Entusiasta de tecnologia e apaixonado por desenvolvimento.  
+       </h2>
       </WobbleCard>
 
       {/* Terceiro card (agora o de baixo): Stacks com carrossel */}
@@ -61,7 +61,7 @@ export function WobbleCardDemo() {
           <InfiniteMovingCards
             items={stacks}
             direction="right"
-            speed="slow"
+            speed="normal"
           />
         </div>
       </WobbleCard>
