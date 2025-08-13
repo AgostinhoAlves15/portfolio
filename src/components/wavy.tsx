@@ -1,48 +1,60 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { WavyBackground } from "./ui/wavy-background";
 import { PointerHighlight } from "@/components/ui/pointer-highlight";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { useTheme } from "next-themes";
 
 export function WavyBackgroundDemo() {
-  const { resolvedTheme } = useTheme(); // <-- ALTERADO: use resolvedTheme
+  const { resolvedTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
 
-  // Define a cor de fundo com base no tema.
-  // resolvedTheme será 'dark' ou 'light' de forma confiável.
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Evita renderizar até saber o tema no cliente
+  if (!mounted) {
+    return null;
+  }
+
   const backgroundFillColor = resolvedTheme === "dark" ? "#09090b" : "#ffffff";
+
+  const gradientDark =
+    "bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 text-transparent bg-clip-text drop-shadow-lg";
+  const gradientLight =
+    "bg-gradient-to-r from-purple-700 via-pink-700 to-blue-700 text-transparent bg-clip-text drop-shadow-md";
+
+  const gradientText =
+    resolvedTheme === "dark" ? gradientDark : gradientLight;
 
   return (
     <WavyBackground
       className="max-w-4xl mx-auto pb-40"
       backgroundFill={backgroundFillColor}
     >
-      {/* ... o resto do seu código permanece o mesmo ... */}
-      {/* Container para o botão de tema no canto superior direito */}
       <div className="absolute top-4 right-4 z-50">
         <ThemeToggle />
       </div>
 
-      {/* Nome */}
-      <p className="text-5xl md:text-4xl lg:text-7xl font-bold inter-var text-center bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 text-transparent bg-clip-text pb-4">
+      <p
+        className={`text-5xl md:text-4xl lg:text-7xl font-bold inter-var text-center pb-4 ${gradientText}`}
+      >
         Agostinho Alves
       </p>
 
-      {/* Frase */}
-      <div className="mt- font-normal inter-var text-center flex items-center flex-col text-2xl text-foreground drop-shadow-md leading-relaxed">
+      <div className="mt- font-normal inter-var text-center flex items-center flex-col text-2xl text-foreground leading-relaxed">
         Desenvolvendo interfaces que conectam pessoas e tecnologia de forma
         <br />
         <PointerHighlight>
-          <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-cyan-400 text-transparent text-center bg-clip-text font-bold">
+          <span className={`${gradientText} font-bold`}>
             simples e encantadora.
           </span>
         </PointerHighlight>
       </div>
 
-      {/* Botões - CORRIGIDO: Cores com contraste para tema claro e escuro */}
       <div className="flex items-center justify-center gap-4 mt-8">
-        {/* Botão Baixar Currículo */}
         <a
           href="/curriculo.pdf"
           download
@@ -65,7 +77,6 @@ export function WavyBackgroundDemo() {
           Baixar Currículo
         </a>
 
-        {/* Botão Contate-me */}
         <a
           href="#contato"
           className="inline-flex items-center px-4 py-2 rounded-lg shadow hover:opacity-90 transition bg-gray-800 text-white dark:bg-white dark:text-gray-800"
