@@ -1,7 +1,7 @@
 import { WobbleCardDemo } from "@/components/Sobre";
 import { FloatingNavDemo } from "@/components/NavBar"
 import { FlipWordsDemo } from "@/components/flip"
-import { HeroHighlightDemo } from "@/components/hero"
+import { WorkExperience } from "@/components/hero"
 import { PointerHighlightDemo } from "@/components/pointer"
 import { WavyBackgroundDemo } from "@/components/wavy"
 import { SignupFormDemo } from "@/components/form"
@@ -22,7 +22,7 @@ export default function HomePage() {
       <FloatingNavDemo />
 
       {/* Projetos desenvolvidos */}
-      <ProjectTitle />
+      <ProjectTitle title="Projetos desenvolvidos"/>
       <ProjectShowcase />
       
       {/* NOVO: Adiciona um espaço grande entre as seções */}
@@ -32,7 +32,7 @@ export default function HomePage() {
 
       {/* Hero Section */}
       <section className="min-h-screen flex flex-col justify-center items-center px-4 gap-8">
-        <HeroHighlightDemo />
+        <WorkExperience />
         <FlipWordsDemo />
       </section>
 

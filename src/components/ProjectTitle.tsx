@@ -3,11 +3,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-export function ProjectTitle() {
+// Agora o componente aceita uma prop chamada "title"
+export function ProjectTitle({ title }: { title: string }) {
   return (
     <div className="flex flex-col items-center justify-center pt-20 px-4">
+      {/* O título agora é dinâmico, usando a prop "title" */}
       <h1 className="text-center text-4xl sm:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-400 to-cyan-400 pb-3">
-        Projetos desenvolvidos
+        {title}
       </h1>
       <motion.div
         initial={{ width: 0 }}
