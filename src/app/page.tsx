@@ -4,7 +4,7 @@ import { FlipWordsDemo } from "@/components/flip";
 import { WorkExperience } from "@/components/hero";
 import { PointerHighlightDemo } from "@/components/pointer";
 import { WavyBackgroundDemo } from "@/components/wavy";
-import { SignupFormDemo } from "@/components/form";
+import { ContactSection } from "@/components/form";
 import { CanvasRevealEffectDemo } from "@/components/canvas";
 import { ProjectShowcase } from "@/components/projetos";
 import { ProjectTitle } from "@/components/ProjectTitle";
@@ -46,7 +46,7 @@ export default function HomePage() {
 
       {/* Formulário de Contato */}
       <section className="py-20 flex justify-center items-center px-4">
-        <SignupFormDemo />
+        <ContactSection />
       </section>
 
       {/* Rodapé */}

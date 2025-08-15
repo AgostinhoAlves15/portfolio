@@ -1,103 +1,165 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
+import { ProjectTitle } from "./ProjectTitle";
 import { Label } from "./ui/label";
 import { Input } from "./ui/input";
 import { cn } from "@/lib/utils";
 import {
   IconBrandGithub,
-  IconBrandGoogle,
-  IconBrandOnlyfans,
+  IconBrandLinkedin,
+  IconBrandInstagram,
+  IconBrandWhatsapp,
+  IconMail,
 } from "@tabler/icons-react";
 
-export function SignupFormDemo() {
+export function ContactSection() {
+  const [nome, setNome] = useState("");
+  const [mensagem, setMensagem] = useState("");
+  const [nomeError, setNomeError] = useState("");
+  const [mensagemError, setMensagemError] = useState("");
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted");
+    
+    let hasError = false;
+    
+    // Validação do campo Nome
+    if (nome.trim().length < 3) {
+      setNomeError("Preciso de mais letras :)");
+      hasError = true;
+    } else {
+      setNomeError("");
+    }
+    
+    // Validação do campo Mensagem
+    if (mensagem.trim() === "") {
+      setMensagemError("Me conte mais!");
+      hasError = true;
+    } else {
+      setMensagemError("");
+    }
+    
+    if (!hasError) {
+      const phoneNumber = "5588999636921"; // Substitua pelo seu número de telefone
+      const text = `Olá, meu nome é ${nome}. Gostaria de entrar em contato sobre a seguinte mensagem: ${mensagem}`;
+      const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(text)}`;
+      
+      window.open(whatsappUrl, "_blank");
+      
+      // Limpar os campos do formulário após o envio
+      setNome("");
+      setMensagem("");
+    }
   };
+
   return (
-    <div className="shadow-input mx-auto w-full max-w-md rounded-none bg-white p-4 md:rounded-2xl md:p-8 dark:bg-black">
-      <h2 className="text-xl font-bold text-neutral-800 dark:text-neutral-200">
-        Welcome to Aceternity
-      </h2>
-      <p className="mt-2 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
-        Login to aceternity if you can because we don&apos;t have a login flow
-        yet
+    <div className="flex flex-col items-center justify-center py-20 px-4">
+      {/* Título e Subtítulo */}
+      <ProjectTitle title="Contatos"/>
+      <p className="max-w-xl text-center text-sm md:text-base mt-5 text-black dark:text-neutral-300 mb-10">
+        Transforme Sua Ideia em Resultados Vamos Começar Hoje?
       </p>
 
-      <form className="my-8" onSubmit={handleSubmit}>
-        <div className="mb-4 flex flex-col space-y-2 md:flex-row md:space-y-0 md:space-x-2">
-          <LabelInputContainer>
-            <Label htmlFor="firstname">First name</Label>
-            <Input id="firstname" placeholder="Tyler" type="text" />
-          </LabelInputContainer>
-          <LabelInputContainer>
-            <Label htmlFor="lastname">Last name</Label>
-            <Input id="lastname" placeholder="Durden" type="text" />
-          </LabelInputContainer>
+      {/* Container principal com duas colunas */}
+      <div className="shadow-input w-full lg:w-[90vw] mx-auto rounded-lg bg-white p-6 md:rounded-2xl md:p-12 dark:bg-black flex flex-col lg:flex-row lg:space-x-8 space-y-8 lg:space-y-0">
+        {/* Coluna da Esquerda: Formulário de Mensagem */}
+        <div className="flex flex-col w-full lg:w-1/2">
+          <h3 className="text-xl font-semibold mb-4 text-black dark:text-white">
+            Envie uma mensagem!
+          </h3>
+          <form className="my-4 flex flex-col space-y-4" onSubmit={handleSubmit}>
+            <LabelInputContainer>
+              <Label htmlFor="nome">Nome</Label>
+              <Input 
+                id="nome" 
+                placeholder="Seu nome" 
+                type="text" 
+                value={nome}
+                onChange={(e) => setNome(e.target.value)}
+              />
+              {nomeError && <p className="text-red-500 text-sm mt-1">{nomeError}</p>}
+            </LabelInputContainer>
+
+            <LabelTextareaContainer className="mb-4 flex-grow">
+              <Label htmlFor="mensagem">Mensagem</Label>
+              <textarea
+                id="mensagem"
+                placeholder="Sua mensagem..."
+                value={mensagem}
+                onChange={(e) => setMensagem(e.target.value)}
+                className="flex h-48 w-full rounded-md border border-neutral-300 bg-gray-50 px-3 py-2 text-sm text-black placeholder:text-neutral-500 focus:border-cyan-500 focus:outline-none focus:ring-1 focus:ring-cyan-500 disabled:cursor-not-allowed disabled:opacity-50 dark:border-neutral-700 dark:bg-zinc-800 dark:text-neutral-200 dark:placeholder:text-neutral-500 dark:focus:border-cyan-400"
+              />
+              <span className="text-xs text-neutral-500 dark:text-neutral-400 mt-1">Me conte mais como posso te ajudar!</span>
+              {mensagemError && <p className="text-red-500 text-sm mt-1">{mensagemError}</p>}
+            </LabelTextareaContainer>
+
+            <button
+              className="group/btn relative flex h-10 w-full items-center justify-center space-x-2 rounded-md bg-emerald-500 px-4 font-medium text-white shadow-md transition-colors hover:bg-emerald-600"
+              type="submit"
+            >
+              <IconBrandWhatsapp className="h-4 w-4" />
+              <span className="text-sm">
+                Enviar
+              </span>
+              <BottomGradient />
+            </button>
+          </form>
         </div>
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="email">Email Address</Label>
-          <Input id="email" placeholder="projectmayhem@fc.com" type="email" />
-        </LabelInputContainer>
-        <LabelInputContainer className="mb-4">
-          <Label htmlFor="password">Password</Label>
-          <Input id="password" placeholder="••••••••" type="password" />
-        </LabelInputContainer>
-        <LabelInputContainer className="mb-8">
-          <Label htmlFor="twitterpassword">Your twitter password</Label>
-          <Input
-            id="twitterpassword"
-            placeholder="••••••••"
-            type="twitterpassword"
-          />
-        </LabelInputContainer>
 
-        <button
-          className="group/btn relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_#27272a_inset,0px_-1px_0px_0px_#27272a_inset]"
-          type="submit"
-        >
-          Sign up &rarr;
-          <BottomGradient />
-        </button>
-
-        <div className="my-8 h-[1px] w-full bg-gradient-to-r from-transparent via-neutral-300 to-transparent dark:via-neutral-700" />
-
-        <div className="flex flex-col space-y-4">
-          <button
-            className="group/btn shadow-input relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_#262626]"
-            type="submit"
-          >
-            <IconBrandGithub className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-sm text-neutral-700 dark:text-neutral-300">
-              GitHub
-            </span>
-            <BottomGradient />
-          </button>
-          <button
-            className="group/btn shadow-input relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_#262626]"
-            type="submit"
-          >
-            <IconBrandGoogle className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-sm text-neutral-700 dark:text-neutral-300">
-              Google
-            </span>
-            <BottomGradient />
-          </button>
-          <button
-            className="group/btn shadow-input relative flex h-10 w-full items-center justify-start space-x-2 rounded-md bg-gray-50 px-4 font-medium text-black dark:bg-zinc-900 dark:shadow-[0px_0px_1px_1px_#262626]"
-            type="submit"
-          >
-            <IconBrandOnlyfans className="h-4 w-4 text-neutral-800 dark:text-neutral-300" />
-            <span className="text-sm text-neutral-700 dark:text-neutral-300">
-              OnlyFans
-            </span>
-            <BottomGradient />
-          </button>
+        {/* Coluna da Direita: Redes Sociais */}
+        <div className="flex flex-col w-full lg:w-1/2 items-center">
+          <h3 className="text-xl font-semibold mb-4 text-black dark:text-white">
+            Acesse minhas redes:
+          </h3>
+          <div className="flex flex-col space-y-10 mt-15 w-full max-w-sm">
+            <SocialButton
+              href="https://www.linkedin.com/in/agostinho-alves-8b319934a/"
+              icon={<IconBrandLinkedin className="h-4 w-4" />}
+              text="LinkedIn"
+              bgColor="bg-blue-600 hover:bg-blue-700"
+            />
+            <SocialButton
+              href="https://github.com/AgostinhoAlves15"
+              icon={<IconBrandGithub className="h-4 w-4" />}
+              text="Github"
+              bgColor="bg-neutral-800 hover:bg-neutral-700"
+            />
+            <SocialButton
+              href="mailto:aalvesdeoliveirafilho1@gmail.com"
+              icon={<IconMail className="h-4 w-4" />}
+              text="Email"
+              bgColor="bg-gray-600 hover:bg-gray-700"
+            />
+            <SocialButton
+              href="https://www.instagram.com/agostinho.67/"
+              icon={<IconBrandInstagram className="h-4 w-4" />}
+              text="Instagram"
+              bgColor="bg-pink-500 hover:bg-pink-600"
+            />
+          </div>
         </div>
-      </form>
+      </div>
     </div>
   );
 }
+
+const SocialButton = ({ href, icon, text, bgColor }: { href: string; icon: React.ReactNode; text: string; bgColor: string }) => (
+  <a
+    href={href}
+    target="_blank"
+    rel="noopener noreferrer"
+    className={cn(
+      "group/btn relative flex h-10 w-full items-center justify-center space-x-2 rounded-md px-4 font-medium text-white shadow-md transition-colors",
+      bgColor
+    )}
+  >
+    {icon}
+    <span className="text-sm">
+      {text}
+    </span>
+    <BottomGradient />
+  </a>
+);
 
 const BottomGradient = () => {
   return (
@@ -109,6 +171,20 @@ const BottomGradient = () => {
 };
 
 const LabelInputContainer = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return (
+    <div className={cn("flex w-full flex-col space-y-2", className)}>
+      {children}
+    </div>
+  );
+};
+
+const LabelTextareaContainer = ({
   children,
   className,
 }: {
