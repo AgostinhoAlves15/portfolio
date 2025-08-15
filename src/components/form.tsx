@@ -53,7 +53,7 @@ export function ContactSection() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center py-20 px-4">
+    <div className="flex flex-col items-center justify-center py-1 px-4">
       {/* Título e Subtítulo */}
       <ProjectTitle title="Contatos"/>
       <p className="max-w-xl text-center text-sm md:text-base mt-5 text-black dark:text-neutral-300 mb-10">

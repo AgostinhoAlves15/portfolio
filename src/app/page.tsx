@@ -1,19 +1,19 @@
 import { WobbleCardDemo } from "@/components/Sobre";
 import { FloatingNavDemo } from "@/components/NavBar";
-import { FlipWordsDemo } from "@/components/flip";
 import { WorkExperience } from "@/components/hero";
-import { PointerHighlightDemo } from "@/components/pointer";
 import { WavyBackgroundDemo } from "@/components/wavy";
 import { ContactSection } from "@/components/form";
 import { CanvasRevealEffectDemo } from "@/components/canvas";
 import { ProjectShowcase } from "@/components/projetos";
 import { ProjectTitle } from "@/components/ProjectTitle";
+import { ResumeDownloadButton } from "@/components/buttonCR";
 
 export default function HomePage() {
   return (
     <main className="bg-white dark:bg-black text-black dark:text-white min-h-screen flex flex-col">
       {/* Background (o WavyBackgroundDemo já lida com o seu próprio fundo) */}
-      <WavyBackgroundDemo />
+      <WavyBackgroundDemo/>
+      <ResumeDownloadButton />
 
       {/* Sobre Mim */}
       <div>
@@ -21,7 +21,7 @@ export default function HomePage() {
       </div>
 
       {/* Navegação fixa no topo */}
-      <FloatingNavDemo />
+      <FloatingNavDemo/>
 
       {/* Projetos desenvolvidos */}
       <div className="py-20 flex flex-col items-center">
@@ -29,18 +29,13 @@ export default function HomePage() {
         <ProjectShowcase />
       </div>
       
-      {/* NOVO: Adiciona um espaço grande entre as seções */}
-      <div className="py-40" />
-
       {/* Hero Section */}
-      <section className="min-h-screen flex flex-col justify-center items-center px-4 gap-8">
+      <section className="min-h-screen flex flex-col justify-center items-center px-4 gap-8 py-20">
         <WorkExperience />
-        <FlipWordsDemo />
       </section>
 
       {/* Efeitos Visuais */}
       <section className="py-20 flex flex-col gap-16 items-center justify-center px-4">
-        <PointerHighlightDemo />
         <CanvasRevealEffectDemo />
       </section>
 
